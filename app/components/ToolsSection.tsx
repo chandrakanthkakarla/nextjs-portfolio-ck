@@ -73,7 +73,6 @@ export default function ToolsSection({ animated = false }: ToolsSectionProps) {
                     />
                 </div>
             </div>
-            <ContactSection />
         </section>
     );
 
