@@ -1,5 +1,6 @@
 import ProfileCard from "./components/ProfileCard";
-import ProjectRow from "./components/ProjectRow";
+import ProjectsSection from "./components/ProjectsSection";
+
 export default function HomePage() {
   return (
     <main className="pt-24">
@@ -12,16 +13,15 @@ export default function HomePage() {
 
           {/* RIGHT: normal content (page scrolls) */}
           <div className="space-y-10 pb-16">
-            <div className="bg-zinc-950/40 p-10">
+            <div className="p-10 pt-0">
               <h1 className="font-black leading-[0.9] tracking-tight">
-                <span className="block text-[clamp(3.5rem,7vw,7rem)] text-white">
+                <span className="block text-[clamp(3.5rem,7vw,7rem)] dark:text-white text-black">
                   SOFTWARE
                 </span>
                 <span className="block text-[clamp(3.5rem,7vw,7rem)] text-zinc-500/50">
                   ENGINEER
                 </span>
               </h1>
-
 
               <p className="mt-6 max-w-2xl text-zinc-400">
                 Passionate about creating intuitive and engaging user experiences.
@@ -35,23 +35,10 @@ export default function HomePage() {
 
             </div>
 
-            <div className="space-y-10 p-10">
-              <ProjectRow
-                title="Revo"
-                subtitle="Free Framer Template"
-                image="https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?auto=format&fit=crop&w=400&q=80"
-              />
-              <ProjectRow
-                title="NajmAI"
-                subtitle="SaaS Framer Template"
-                image="https://images.unsplash.com/photo-1629904853893-c2c8981a1dc5?auto=format&fit=crop&w=400&q=80"
-              />
-              <ProjectRow
-                title="Orbit UI"
-                subtitle="Modern UI Kit"
-                image="https://images.unsplash.com/photo-1581091870627-3d5c1f5d09f1?auto=format&fit=crop&w=400&q=80"
-              />
-            </div>
+            {/* PROJECTS (animated) */}
+            <section id="projects" className="scroll-mt-28">
+              <ProjectsSection animated />
+            </section>
           </div>
         </div>
       </section>
@@ -62,7 +49,7 @@ export default function HomePage() {
 function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div>
-      <div className="text-5xl font-extrabold text-white">
+      <div className="text-5xl font-extrabold dark:text-white text-black">
         {value}
       </div>
       <div className="mt-2 text-sm uppercase tracking-wide text-zinc-500">
