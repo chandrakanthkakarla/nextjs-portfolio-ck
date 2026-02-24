@@ -8,7 +8,7 @@ import {
 const socials = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/chandrakanth18/", icon: Linkedin },
   { label: "GitHub", href: "https://github.com/chandrakanthkakarla", icon: LucideGithub },
-  { label: "Instagram", href: "https://www.instagram.com/aks.haay_/", icon: InstagramIcon },
+  { label: "Instagram", href: "https://www.instagram.com/ckchowdary21", icon: InstagramIcon },
  
 ];
 
