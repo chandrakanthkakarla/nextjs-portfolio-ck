@@ -45,7 +45,7 @@ export default function HomePage() {
 
               <PlaceholderCard
                 title="What I’m Looking For"
-                desc="Opportunities to work on meaningful products, solve complex problems, and build systems that scale."
+                desc="Looking to grow as a Network & Security Engineer, building strong expertise in advanced networking and cybersecurity."
               />
             </div>
 
