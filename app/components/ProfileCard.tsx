@@ -6,7 +6,7 @@ import {
   Globe,
 } from "lucide-react";
 const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/dev-akshay-p", icon: Linkedin },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/chandrakanth18/", icon: Linkedin },
   { label: "GitHub", href: "https://github.com/Akshayp2002", icon: LucideGithub },
   { label: "Instagram", href: "https://www.instagram.com/aks.haay_/", icon: InstagramIcon },
   { label: "Portfolio", href: "https://devakshay.vercel.app/home", icon: Globe },
