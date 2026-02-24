@@ -19,7 +19,7 @@ export default function HomePage() {
             <div className="px-10 py-0">
               <h1 className="font-black leading-[0.9] tracking-tight">
                 <span className="block text-[clamp(3.5rem,7vw,7rem)] dark:text-white text-black">
-                  SOFTWARE
+                  NETWORK
                 </span>
                 <span className="block text-[clamp(3.5rem,7vw,7rem)] text-zinc-500/50">
                   ENGINEER
@@ -32,8 +32,8 @@ export default function HomePage() {
               </p>
 
               <div className="mt-10 grid grid-cols-2 gap-10 sm:grid-cols-3">
-                <Stat value="+3" label="Years of experience" />
-                <Stat value="+10" label="Projects completed" />
+                <Stat value="+2" label="Years of experience" />
+                <Stat value="+2" label="Projects completed" />
               </div>
 
             </div>

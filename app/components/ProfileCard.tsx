@@ -7,9 +7,9 @@ import {
 } from "lucide-react";
 const socials = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/chandrakanth18/", icon: Linkedin },
-  { label: "GitHub", href: "https://github.com/Akshayp2002", icon: LucideGithub },
+  { label: "GitHub", href: "https://github.com/chandrakanthkakarla", icon: LucideGithub },
   { label: "Instagram", href: "https://www.instagram.com/aks.haay_/", icon: InstagramIcon },
-  { label: "Portfolio", href: "https://devakshay.vercel.app/home", icon: Globe },
+ 
 ];
 
 <div className="mt-8 flex items-center justify-center gap-6">
@@ -62,7 +62,7 @@ export default function ProfileCard() {
 
         {/* description */}
         <p className="mt-6 text-center text-lg leading-snug text-zinc-500">
-          A Network Engineer who has developed.
+          A Network Engineer
         </p>
 
         {/* socials */}

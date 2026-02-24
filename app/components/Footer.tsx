@@ -5,7 +5,7 @@ export default function Footer() {
                 <p className="text-center text-sm text-neutral-600 dark:text-neutral-400">
                     Made by{" "}
                     <span className="font-semibold text-neutral-900 dark:text-neutral-100">
-                        Akshay
+                        Chandrakanth
                     </span>{" "}
                     | Powered by{" "}
                     <span className="font-semibold text-neutral-900 dark:text-neutral-100">
