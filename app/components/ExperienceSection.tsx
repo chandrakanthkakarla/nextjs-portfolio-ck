@@ -28,19 +28,7 @@ export default function ExperienceSection({ animated = false }: ProjectsSectionP
                     period="August 2023 – Present"
                 />
 
-                <ExperienceRow
-                    title="Cloudrevel Innovation"
-                    role="Software Engineer"
-                    description="Developed and optimized backend systems with a focus on database design, API performance, and scalable architecture. Collaborated closely with frontend teams on production applications."
-                    period="March 2023 – April 2025"
-                />
 
-                <ExperienceRow
-                    title="AOF Engineering Systems, LLC"
-                    role="Junior Developer"
-                    description="Gained hands-on experience in backend development, database management, and performance optimization within production environments."
-                    period="September 2022 – February 2023"
-                />
             </div>
         </section>
     );
