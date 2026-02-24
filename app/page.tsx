@@ -40,7 +40,7 @@ export default function HomePage() {
             <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
               <PlaceholderCard
                 title="Currently Exploring"
-                desc="Experimenting with AI-driven systems, scalable backend architecture, and performance-focused web applications."
+                desc="Currently Exploring: CCNA mastery, Network Architecture, SOC workflows, and AI-enhanced network monitoring."
               />
 
               <PlaceholderCard
