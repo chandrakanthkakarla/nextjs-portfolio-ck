@@ -4,8 +4,7 @@ import { Poppins } from "next/font/google";
 import Footer from "./components/Footer";
 import ScrollToTitleOnMobile from "./components/ScrollToTitleOnMobile";
 import { Analytics } from "@vercel/analytics/next";
-import { AnimatePresence } from "framer-motion";
-import CursorGlow from "./components/CursorGlow"; // ✅ ADD THIS
+import CursorGlow from "./components/CursorGlow";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -28,18 +27,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${poppins.variable} dark`}>
-      <body className="min-h-screen font-sans bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
-        <CursorGlow />        {/* ✅ ADD THIS */}
+      <body className="font-sans bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
+        <CursorGlow />
         <Navbar />
         <ScrollToTitleOnMobile />
-        <main className="pt-24">
-          <AnimatePresence mode="wait">
-            {children}
-          </AnimatePresence>
-        </main>
+        <div className="pt-24">
+          {children}
+        </div>
         <Footer />
+        <Analytics />
       </body>
-      <Analytics />
     </html>
   );
 }
