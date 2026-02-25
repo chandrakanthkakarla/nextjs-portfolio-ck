@@ -19,10 +19,14 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
+    // ✅ On other pages, highlight the matching nav icon
     if (pathname !== "/") {
       setActiveSection("");
       return;
     }
+
+    // ✅ When landing/returning to home, always start at "home"
+    setActiveSection("home");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -33,7 +37,7 @@ export default function Navbar() {
         });
       },
       {
-        rootMargin: "-40% 0px -55% 0px",
+        rootMargin: "-10% 0px -85% 0px",
         threshold: 0,
       }
     );
