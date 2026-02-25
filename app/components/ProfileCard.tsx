@@ -15,14 +15,14 @@ export default function ProfileCard() {
       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
       className="relative overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-black/5"
     >
-      {/* spinning dashed ring — top left */}
+      {/* spinning ring top-left */}
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
         className="pointer-events-none absolute -left-10 -top-10 h-44 w-44 rounded-full border-[3px] border-dashed border-gray-300 opacity-60"
       />
 
-      {/* spinning dashed ring — bottom right */}
+      {/* spinning ring bottom-right */}
       <motion.div
         animate={{ rotate: -360 }}
         transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
@@ -51,7 +51,7 @@ export default function ProfileCard() {
           Chandrakanth Kakarla
         </motion.h2>
 
-        {/* badge */}
+        {/* role badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -63,6 +63,22 @@ export default function ProfileCard() {
           </span>
         </motion.div>
 
+        {/* ✅ availability badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
+          className="mt-3 flex justify-center"
+        >
+          <span className="flex items-center gap-2 rounded-full bg-green-500/10 px-4 py-1.5 text-sm font-semibold text-green-600 ring-1 ring-green-500/20">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+            </span>
+            Available for work
+          </span>
+        </motion.div>
+
         {/* socials */}
         <motion.div
           className="mt-6 flex items-center justify-center gap-6"
@@ -70,7 +86,7 @@ export default function ProfileCard() {
           animate="visible"
           variants={{
             hidden: {},
-            visible: { transition: { staggerChildren: 0.12, delayChildren: 0.6 } },
+            visible: { transition: { staggerChildren: 0.12, delayChildren: 0.7 } },
           }}
         >
           {socials.map(({ label, href, icon: Icon }) => (
@@ -88,6 +104,7 @@ export default function ProfileCard() {
             </motion.a>
           ))}
         </motion.div>
+
       </div>
     </motion.div>
   );
