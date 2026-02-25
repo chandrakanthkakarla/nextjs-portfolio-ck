@@ -1,5 +1,5 @@
 "use client";
-
+import NetworkBackground from "./components/NetworkBackground";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import ContactSection from "./components/ContactSection";
@@ -20,8 +20,10 @@ export default function HomePage() {
 
           <div className="space-y-10 pb-16">
 
-            <section id="home" className="scroll-mt-28 px-10 py-0">
-              {/* ✅ Typewriter heading */}
+            {/* ✅ relative added, NetworkBackground inside */}
+            <section id="home" className="relative scroll-mt-28 px-10 py-0">
+              <NetworkBackground />
+
               <h1 className="font-black leading-[0.9] tracking-tight">
                 <span className="block text-[clamp(3.5rem,7vw,7rem)] dark:text-white text-black">
                   NETWORK
@@ -33,7 +35,6 @@ export default function HomePage() {
                 Passionate about building secure and reliable network infrastructures. Focused on turning complex technical challenges into stable, high-performing systems that drive real-world impact.
               </p>
 
-              {/* ✅ Animated counters */}
               <div className="mt-10 grid grid-cols-2 gap-10 sm:grid-cols-3">
                 <Stat value={2} label="Years of experience" />
                 <Stat value={2} label="Projects completed" />
@@ -74,7 +75,6 @@ export default function HomePage() {
   );
 }
 
-// ✅ Typewriter component
 function Typewriter() {
   const words = ["ENGINEER", "NOC SPECIALIST", "SECURITY ANALYST"];
   const [index, setIndex] = useState(0);
@@ -107,7 +107,6 @@ function Typewriter() {
   );
 }
 
-// ✅ Animated counter Stat
 function Stat({ value, label }: { value: number; label: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);

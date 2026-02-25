@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import ScrollToTitleOnMobile from "./components/ScrollToTitleOnMobile";
 import { Analytics } from "@vercel/analytics/next";
 import { AnimatePresence } from "framer-motion";
+import CursorGlow from "./components/CursorGlow"; // ✅ ADD THIS
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -13,7 +14,6 @@ const poppins = Poppins({
   display: "swap",
 });
 
-// ✅ Stops mobile browser from auto-zooming
 export const viewport = {
   width: "device-width",
   initialScale: 1,
@@ -29,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${poppins.variable} dark`}>
       <body className="min-h-screen font-sans bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
+        <CursorGlow />        {/* ✅ ADD THIS */}
         <Navbar />
         <ScrollToTitleOnMobile />
         <main className="pt-24">
