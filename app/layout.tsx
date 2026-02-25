@@ -3,7 +3,8 @@ import Navbar from "./components/Navbar";
 import { Poppins } from "next/font/google";
 import Footer from "./components/Footer";
 import ScrollToTitleOnMobile from "./components/ScrollToTitleOnMobile";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
+import { AnimatePresence } from "framer-motion"; // ✅ ADD THIS
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -22,7 +23,11 @@ export default function RootLayout({
       <body className="min-h-screen font-sans bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
         <Navbar />
         <ScrollToTitleOnMobile />
-        <main className="pt-24">{children}</main>
+        <main className="pt-24">
+          <AnimatePresence mode="wait"> {/* ✅ ADD THIS */}
+            {children}
+          </AnimatePresence>             {/* ✅ ADD THIS */}
+        </main>
         <Footer />
       </body>
       <Analytics />

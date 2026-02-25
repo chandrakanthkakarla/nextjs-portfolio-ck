@@ -15,7 +15,8 @@ export default function HomePage() {
           </aside>
 
           {/* RIGHT: normal content (page scrolls) */}
-          <div className="space-y-10 pb-16">
+          <div id="home" className="space-y-10 pb-16">
+
             <div className="px-10 py-0">
               <h1 className="font-black leading-[0.9] tracking-tight">
                 <span className="block text-[clamp(3.5rem,7vw,7rem)] dark:text-white text-black">
