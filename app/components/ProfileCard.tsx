@@ -1,17 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Linkedin, Instagram, MapPin, Download, ExternalLink } from "lucide-react";
+import { Linkedin, Download } from "lucide-react";
 
 const socials = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/chandrakanth18", icon: Linkedin },
-  // { label: "Instagram", href: "https://www.instagram.com/ckchowdary21", icon: Instagram },
 ];
 
 const stats = [
-  { value: "2+",    label: "Years Exp." },
-  { value: "CCNA",  label: "In Progress" },
-  { value: "NOC",   label: "Operations" },
+  { value: "2+",   label: "Years Exp." },
+  { value: "CCNA", label: "In Progress" },
+  { value: "NOC",  label: "Operations" },
 ];
 
 const certBadges = [
@@ -82,17 +81,6 @@ export default function ProfileCard() {
           </span>
         </motion.div>
 
-        {/* Location */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-          className="mt-2 flex items-center justify-center gap-1.5 text-sm text-zinc-400
-            dark:text-zinc-500"
-        >
-          
-        </motion.div>
-
         {/* Available badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.85 }}
@@ -155,7 +143,7 @@ export default function ProfileCard() {
         {/* Divider */}
         <div className="my-5 border-t border-zinc-100 dark:border-zinc-800" />
 
-        {/* Socials */}
+        {/* Socials + Resume */}
         <motion.div
           className="flex items-center justify-center gap-3"
           initial="hidden"
@@ -186,10 +174,12 @@ export default function ProfileCard() {
             </motion.a>
           ))}
 
-          {/* Resume download */}
+          {/* Resume download — target="_blank" fixes Vercel download issue */}
           <motion.a
             href="/resume.pdf"
-            download
+            download="Chandrakanth_Kakarla_Resume.pdf"
+            target="_blank"
+            rel="noreferrer"
             aria-label="Download Resume"
             variants={{
               hidden: { opacity: 0, y: 8 },
