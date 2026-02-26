@@ -9,7 +9,7 @@ export default function Footer() {
           © {new Date().getFullYear()} Chandrakanth Kakarla
         </p>
         <p className="flex items-center gap-1.5 text-sm text-zinc-400 dark:text-zinc-500">
-          Crafted with <Heart size={13} className="text-red-400 fill-red-400" /> in Chennai
+          Crafted with <Heart size={13} className="text-red-400 fill-red-400" /> by me
         </p>
       </div>
     </footer>
