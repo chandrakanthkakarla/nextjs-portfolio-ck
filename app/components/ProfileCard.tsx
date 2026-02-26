@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Linkedin, Download } from "lucide-react";
+import { Linkedin } from "lucide-react";
 
 const socials = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/chandrakanth18", icon: Linkedin },
@@ -143,7 +143,7 @@ export default function ProfileCard() {
         {/* Divider */}
         <div className="my-5 border-t border-zinc-100 dark:border-zinc-800" />
 
-        {/* Socials + Resume */}
+        {/* Socials */}
         <motion.div
           className="flex items-center justify-center gap-3"
           initial="hidden"
@@ -173,27 +173,8 @@ export default function ProfileCard() {
               <Icon size={20} strokeWidth={2} />
             </motion.a>
           ))}
-
-          {/* Resume download — target="_blank" fixes Vercel download issue */}
-          <motion.a
-            href="/resume.pdf"
-            download="Chandrakanth_Kakarla_Resume.pdf"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Download Resume"
-            variants={{
-              hidden: { opacity: 0, y: 8 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-2 rounded-full bg-zinc-900 px-4 py-2.5
-              text-sm font-semibold text-white transition-all hover:bg-zinc-700
-              dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
-          >
-            <Download size={14} strokeWidth={2.5} />
-            Resume
-          </motion.a>
         </motion.div>
+
       </div>
     </motion.div>
   );
