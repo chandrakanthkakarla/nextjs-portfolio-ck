@@ -14,8 +14,8 @@ const directLinks = [
   {
     icon: Mail,
     label: "Email",
-    value: "chandrakanth@email.com",
-    href: "mailto:chandrakanth@email.com",
+    value: "chandrakanth.kakarla96@gmail.com",
+    href: "mailto:chandrakanth.kakarla96@gmail.com",
     copyable: true,
   },
   {
