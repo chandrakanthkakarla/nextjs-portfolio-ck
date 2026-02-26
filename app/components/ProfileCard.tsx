@@ -16,9 +16,9 @@ const stats = [
 
 const certBadges = [
   "Google IT Support",
-  
   "Zero Trust (ZTCA)",
   "Aws Cloud Practitioner",
+  "CCNA (In Progress)",
 ];
 
 export default function ProfileCard() {
