@@ -1,20 +1,29 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { useEffect, useRef } from "react";
 
 export default function CursorGlow() {
-  const [pos, setPos] = useState({ x: -300, y: -300 });
+  const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const move = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
+    const el = glowRef.current;
+    if (!el) return;
+
+    const move = (e: MouseEvent) => {
+      el.style.transform = `translate(${e.clientX - 192}px, ${e.clientY - 192}px)`;
+    };
+
     window.addEventListener("mousemove", move);
     return () => window.removeEventListener("mousemove", move);
   }, []);
 
   return (
     <div
-      className="pointer-events-none fixed z-[9999] h-72 w-72 rounded-full
-        bg-orange-500/10 blur-3xl transition-all duration-200 ease-out"
-      style={{ transform: `translate(${pos.x - 144}px, ${pos.y - 144}px)` }}
+      ref={glowRef}
+      className="pointer-events-none fixed top-0 left-0 z-0 h-96 w-96 rounded-full
+        bg-gradient-radial from-orange-400/10 via-transparent to-transparent
+        blur-3xl transition-transform duration-75 ease-out"
+      aria-hidden
     />
   );
 }
