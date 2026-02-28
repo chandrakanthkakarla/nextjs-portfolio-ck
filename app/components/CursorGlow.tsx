@@ -1,97 +1,146 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef } from "react";
+
+interface Trail {
+  x: number;
+  y: number;
+  alpha: number;
+  size: number;
+}
 
 export default function CursorGlow() {
-  const [hovering, setHovering]   = useState(false);
-  const [clicking, setClicking]   = useState(false);
-  const [visible,  setVisible]    = useState(false);
-
-  const cursorX = useMotionValue(-200);
-  const cursorY = useMotionValue(-200);
-  const springX = useSpring(cursorX, { stiffness: 130, damping: 18, mass: 0.5 });
-  const springY = useSpring(cursorY, { stiffness: 130, damping: 18, mass: 0.5 });
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
-    const move   = (e: MouseEvent) => { cursorX.set(e.clientX); cursorY.set(e.clientY); setVisible(true); };
-    const hide   = () => setVisible(false);
-    const show   = () => setVisible(true);
-    const onDown = () => setClicking(true);
-    const onUp   = () => setClicking(false);
-    const hIn    = () => setHovering(true);
-    const hOut   = () => setHovering(false);
+    const canvas = canvasRef.current!;
+    const ctx    = canvas.getContext("2d")!;
+
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener("resize", () => {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    let mouseX    = -200;
+    let mouseY    = -200;
+    let hovering  = false;
+    let animId: number;
+
+    // --- Get current accent color from CSS var ---
+    const getAccent = (): [number, number, number] => {
+      const raw = getComputedStyle(document.documentElement)
+        .getPropertyValue("--accent").trim();
+      const parts = raw.split(" ").map(Number);
+      if (parts.length === 3) return [parts[0], parts[1], parts[2]];
+      return [249, 115, 22]; // fallback orange
+    };
+
+    // --- Trail history ---
+    const TRAIL_LEN = 18;
+    const trail: Trail[] = Array.from({ length: TRAIL_LEN }, () => ({
+      x: -200, y: -200, alpha: 0, size: 0,
+    }));
+
+    let headX = -200;
+    let headY = -200;
+
+    // --- Smooth lerp head towards mouse ---
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+    // --- Main draw loop ---
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const [r, g, b] = getAccent();
+      const speed     = hovering ? 0.18 : 0.28;
+
+      // Lerp head
+      headX = lerp(headX, mouseX, speed);
+      headY = lerp(headY, mouseY, speed);
+
+      // Shift trail
+      for (let i = trail.length - 1; i > 0; i--) {
+        trail[i].x     = lerp(trail[i].x,     trail[i - 1].x,     0.55);
+        trail[i].y     = lerp(trail[i].y,     trail[i - 1].y,     0.55);
+        trail[i].alpha = (1 - i / trail.length) * (hovering ? 0.55 : 0.35);
+        trail[i].size  = (1 - i / trail.length) * (hovering ? 5   : 3.5);
+      }
+      trail[0].x     = headX;
+      trail[0].y     = headY;
+      trail[0].alpha = hovering ? 0.7  : 0.5;
+      trail[0].size  = hovering ? 6    : 4;
+
+      // Draw trail dots
+      trail.forEach((t) => {
+        if (t.alpha <= 0) return;
+        ctx.beginPath();
+        ctx.arc(t.x, t.y, Math.max(t.size, 0.1), 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r},${g},${b},${t.alpha})`;
+        ctx.fill();
+      });
+
+      // --- Main dot ---
+      ctx.beginPath();
+      ctx.arc(mouseX, mouseY, hovering ? 5 : 4, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${r},${g},${b},1)`;
+      ctx.fill();
+
+      // --- Outer glow ring ---
+      const ringSize = hovering ? 22 : 16;
+      const gradient = ctx.createRadialGradient(
+        mouseX, mouseY, ringSize * 0.3,
+        mouseX, mouseY, ringSize
+      );
+      gradient.addColorStop(0, `rgba(${r},${g},${b},0.12)`);
+      gradient.addColorStop(1, `rgba(${r},${g},${b},0)`);
+      ctx.beginPath();
+      ctx.arc(mouseX, mouseY, ringSize, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      animId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    // --- Events ---
+    const onMove = (e: MouseEvent) => { mouseX = e.clientX; mouseY = e.clientY; };
+
+    const onHIn  = () => { hovering = true;  };
+    const onHOut = () => { hovering = false; };
 
     const attach = () => {
       document.querySelectorAll("a, button, [role='button'], input, textarea, select, label")
         .forEach((el) => {
-          el.addEventListener("mouseenter", hIn);
-          el.addEventListener("mouseleave", hOut);
+          el.addEventListener("mouseenter", onHIn);
+          el.addEventListener("mouseleave", onHOut);
         });
     };
 
-    window.addEventListener("mousemove",  move);
-    document.addEventListener("mouseleave", hide);
-    document.addEventListener("mouseenter", show);
-    window.addEventListener("mousedown",  onDown);
-    window.addEventListener("mouseup",    onUp);
+    window.addEventListener("mousemove", onMove);
     attach();
+    document.body.style.cursor = "none";
 
     const obs = new MutationObserver(attach);
     obs.observe(document.body, { childList: true, subtree: true });
-    document.body.style.cursor = "none";
 
     return () => {
-      window.removeEventListener("mousemove",  move);
-      document.removeEventListener("mouseleave", hide);
-      document.removeEventListener("mouseenter", show);
-      window.removeEventListener("mousedown",  onDown);
-      window.removeEventListener("mouseup",    onUp);
+      cancelAnimationFrame(animId);
+      window.removeEventListener("mousemove", onMove);
       obs.disconnect();
       document.body.style.cursor = "";
     };
-  }, []); // eslint-disable-line
+  }, []);
 
   return (
-    <>
-      {/* Dot — follows cursor instantly */}
-      <motion.div
-        className="pointer-events-none fixed z-[99999] rounded-full"
-        animate={{
-          width:   clicking ? 4  : hovering ? 10 : 6,
-          height:  clicking ? 4  : hovering ? 10 : 6,
-          opacity: visible ? 1 : 0,
-        }}
-        transition={{ duration: 0.1 }}
-        style={{
-          x: cursorX,
-          y: cursorY,
-          translateX: "-50%",
-          translateY: "-50%",
-          backgroundColor: "rgb(var(--accent, 249 115 22))",
-        }}
-      />
-
-      {/* Ring — spring lags behind */}
-      <motion.div
-        className="pointer-events-none fixed z-[99998] rounded-full"
-        animate={{
-          width:           clicking ? 18 : hovering ? 44 : 28,
-          height:          clicking ? 18 : hovering ? 44 : 28,
-          opacity:         visible ? (hovering ? 0.85 : 0.35) : 0,
-          backgroundColor: hovering ? "rgba(var(--accent, 249 115 22) / 0.08)" : "transparent",
-        }}
-        transition={{ duration: 0.15, ease: "easeOut" }}
-        style={{
-          x: springX,
-          y: springY,
-          translateX: "-50%",
-          translateY: "-50%",
-          border: "1.5px solid rgb(var(--accent, 249 115 22))",
-        }}
-      />
-    </>
+    <canvas
+      ref={canvasRef}
+      className="pointer-events-none fixed inset-0 z-[99999]"
+    />
   );
 }
