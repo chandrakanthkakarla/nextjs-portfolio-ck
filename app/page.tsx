@@ -42,24 +42,6 @@ export default function HomePage() {
 
               {/* Content */}
               <div className="relative z-10">
-                {/* Tag */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="mb-6 inline-flex items-center gap-2 rounded-full
-                    border border-orange-500/20 bg-orange-500/10 px-4 py-1.5"
-                >
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping
-                      rounded-full bg-orange-400 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full
-                      bg-orange-500" />
-                  </span>
-                  <span className="text-xs font-semibold tracking-wide text-orange-400">
-                    Open to Work
-                  </span>
-                </motion.div>
 
                 {/* Heading */}
                 <motion.h1
