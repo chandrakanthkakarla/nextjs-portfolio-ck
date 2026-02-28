@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import ScrollToTitleOnMobile from "./components/ScrollToTitleOnMobile";
 import { Analytics } from "@vercel/analytics/next";
 import CursorGlow from "./components/CursorGlow";
+import { ThemeProvider } from "./components/ThemeProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -28,14 +29,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${poppins.variable} dark`}>
       <body className="font-sans bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
-        <CursorGlow />
-        <Navbar />
-        <ScrollToTitleOnMobile />
-        <div className="pt-24">
-          {children}
-        </div>
-        <Footer />
-        <Analytics />
+        <ThemeProvider>
+          <CursorGlow />
+          <Navbar />
+          <ScrollToTitleOnMobile />
+          <div className="pt-24">
+            {children}
+          </div>
+          <Footer />
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );

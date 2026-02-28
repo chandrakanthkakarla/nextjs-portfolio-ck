@@ -2,22 +2,31 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Home, FolderKanban, BarChart3, Wrench, MailCheck } from "lucide-react";
+import { Home, FolderKanban, BarChart3, Wrench, MailCheck, Moon, Zap, Smartphone } from "lucide-react";
+import { useTheme, Theme } from "./ThemeProvider";
 
 const navItems = [
-  { href: "/",          label: "Home",       icon: Home,         section: "home" },
-  { href: "/projects",  label: "Projects",   icon: FolderKanban, section: "projects" },
-  { href: "/experience",label: "Experience", icon: BarChart3,    section: "experience" },
-  { href: "/tools",     label: "Tools",      icon: Wrench,       section: "tools" },
-  { href: "/contact",   label: "Contact",    icon: MailCheck,    section: "contact" },
+  { href: "/",           label: "Home",       icon: Home,          section: "home"       },
+  { href: "/projects",   label: "Projects",   icon: FolderKanban,  section: "projects"   },
+  { href: "/experience", label: "Experience", icon: BarChart3,     section: "experience" },
+  { href: "/tools",      label: "Tools",      icon: Wrench,        section: "tools"      },
+  { href: "/contact",    label: "Contact",    icon: MailCheck,     section: "contact"    },
 ];
+
+const THEME_META: Record<Theme, { icon: any; label: string }> = {
+  dark:   { icon: Moon,       label: "Dark"      },
+  oxygen: { icon: Zap,        label: "Oxygen OS" },
+  ios:    { icon: Smartphone, label: "iOS"       },
+};
 
 export default function Navbar() {
   const pathname = usePathname();
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
+  const { theme, cycle } = useTheme();
+  const ThemeIcon = THEME_META[theme].icon;
 
   useEffect(() => {
     if (pathname !== "/") {
@@ -26,6 +35,7 @@ export default function Navbar() {
       );
       return;
     }
+
     setActiveSection("home");
 
     const observer = new IntersectionObserver(
@@ -51,53 +61,76 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, section: string) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      document.getElementById(section)?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <header className="fixed top-0 left-0 w-full z-[1000] flex justify-center pt-4 pb-2 px-4">
+    <header className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
       <motion.nav
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className={`flex items-center gap-1 rounded-full px-3 py-2.5
-          transition-all duration-300
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className={`flex items-center gap-1 rounded-full px-3 py-2 transition-all duration-300
           ${scrolled
-            ? "bg-zinc-900/90 shadow-2xl shadow-black/30 ring-1 ring-white/10 backdrop-blur-xl"
-            : "bg-zinc-900/70 shadow-lg ring-1 ring-white/8 backdrop-blur-md"
+            ? "bg-white/85 shadow-xl shadow-black/10 ring-1 ring-black/5 backdrop-blur-2xl dark:bg-zinc-900/90 dark:shadow-black/40 dark:ring-white/8"
+            : "bg-white/60 backdrop-blur-xl ring-1 ring-black/5 dark:bg-zinc-900/70 dark:ring-white/5"
           }`}
       >
-        {navItems.map((item) => {
-          const active = pathname === "/" ? activeSection === item.section : pathname === item.href;
-          const Icon = item.icon;
+        {navItems.map(({ href, label, icon: Icon, section }) => {
+          const isActive = activeSection === section;
           return (
             <Link
-              key={item.href}
-              href={item.href}
-              aria-label={item.label}
-              className="group relative grid place-items-center h-11 w-11 rounded-full
-                text-white/60 hover:text-white transition-colors duration-200
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+              key={section}
+              href={href}
+              aria-label={label}
+              onClick={(e) => handleClick(e, section)}
+              className="relative flex items-center justify-center rounded-full p-2.5
+                text-zinc-500 transition-colors hover:text-zinc-900
+                dark:text-zinc-400 dark:hover:text-white"
             >
-              {active && (
+              {isActive && (
                 <motion.span
-                  layoutId="activeBubble"
-                  className="absolute inset-1 rounded-full bg-white/95 shadow-md dark:bg-white"
-                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                  layoutId="nav-pill"
+                  className="absolute inset-0 rounded-full bg-zinc-100 dark:bg-zinc-800"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
-              <Icon
-                className={`relative z-10 h-5 w-5 transition-colors duration-200
-                  ${active ? "text-zinc-900" : "text-white/70 group-hover:text-white"}`}
-              />
-              {/* Tooltip */}
-              <span className="pointer-events-none absolute top-[54px] left-1/2 -translate-x-1/2
-                rounded-lg px-2.5 py-1 text-xs font-medium whitespace-nowrap
-                bg-zinc-900 text-white ring-1 ring-white/10
-                opacity-0 -translate-y-1 transition-all duration-200
-                group-hover:opacity-100 group-hover:translate-y-0">
-                {item.label}
+              <span className={`relative z-10 transition-colors ${isActive ? "text-zinc-900 dark:text-white" : ""}`}>
+                <Icon size={18} strokeWidth={isActive ? 2.5 : 2} />
               </span>
             </Link>
           );
         })}
+
+        {/* Divider */}
+        <div className="mx-1 h-5 w-px rounded-full bg-zinc-200 dark:bg-zinc-700" />
+
+        {/* Theme cycle button */}
+        <motion.button
+          onClick={cycle}
+          whileHover={{ scale: 1.12 }}
+          whileTap={{ scale: 0.9 }}
+          title={`Switch theme (${THEME_META[theme].label})`}
+          className="relative flex h-9 w-9 items-center justify-center rounded-full
+            transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
+          style={{ color: "rgb(var(--accent, 249 115 22))" }}
+        >
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={theme}
+              initial={{ rotate: -80, opacity: 0, scale: 0.4 }}
+              animate={{ rotate: 0,   opacity: 1, scale: 1   }}
+              exit={{    rotate:  80, opacity: 0, scale: 0.4 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <ThemeIcon size={16} strokeWidth={2} />
+            </motion.span>
+          </AnimatePresence>
+        </motion.button>
       </motion.nav>
     </header>
   );

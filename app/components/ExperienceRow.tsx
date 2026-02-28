@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, Calendar, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 type ExperienceRowProps = {
-  title: string;
-  role: string;
+  title:       string;
+  role:        string;
   description: string;
-  period: string;
-  href?: string;
+  period:      string;
+  href?:       string;
 };
 
 export default function ExperienceRow({
@@ -23,53 +23,56 @@ export default function ExperienceRow({
   return (
     <Wrapper
       {...(href ? { href, target: "_blank", rel: "noreferrer" } : {})}
-      whileHover={{ x: 3 }}
-      transition={{ type: "spring", stiffness: 320, damping: 28 }}
-      className="group relative flex flex-col gap-5 sm:flex-row sm:items-start
-        sm:justify-between rounded-2xl border border-zinc-100 bg-white/70 p-7
-        transition-all duration-300 hover:border-zinc-200 hover:bg-white hover:shadow-lg
-        hover:shadow-black/4 dark:border-zinc-800/60 dark:bg-zinc-900/50
-        dark:hover:border-zinc-700 dark:hover:bg-zinc-800/60"
+      whileHover={{ y: -2 }}
+      transition={{ type: "spring", stiffness: 320, damping: 22 }}
+      className="group relative flex gap-5 rounded-2xl border border-zinc-100
+        bg-white/70 p-6 transition-all duration-300
+        hover:border-zinc-200 hover:bg-white hover:shadow-xl hover:shadow-black/5
+        dark:border-zinc-800/60 dark:bg-zinc-900/50 dark:hover:border-zinc-700
+        dark:hover:bg-zinc-800/60"
     >
       {/* Left accent bar */}
-      <span className="absolute left-0 top-6 bottom-6 w-[3px] rounded-full bg-transparent
-        transition-all duration-300 group-hover:bg-orange-500" />
+      <div
+        className="mt-1 w-1 shrink-0 rounded-full opacity-60
+          transition-opacity duration-300 group-hover:opacity-100"
+        style={{ backgroundColor: "rgb(var(--accent, 249 115 22))" }}
+      />
 
-      <div className="max-w-2xl space-y-3 pl-1">
+      <div className="flex flex-1 flex-col gap-2">
         {/* Company + role */}
-        <div className="space-y-1">
-          <h3 className="text-2xl font-extrabold tracking-tight text-zinc-900
-            dark:text-zinc-100">
-            {title}
-          </h3>
-          <div className="flex items-center gap-2 text-base font-semibold text-orange-500">
-            <Briefcase size={14} strokeWidth={2.5} />
-            {role}
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <h3 className="text-[17px] font-extrabold tracking-tight
+              text-zinc-900 dark:text-zinc-100">
+              {title}
+            </h3>
+            <p className="mt-0.5 text-sm font-semibold"
+              style={{ color: "rgb(var(--accent, 249 115 22))" }}>
+              {role}
+            </p>
           </div>
+          {href && (
+            <ArrowUpRight
+              size={18}
+              className="mt-0.5 shrink-0 text-zinc-300 transition-all
+                group-hover:text-zinc-600 dark:text-zinc-600
+                dark:group-hover:text-zinc-300"
+            />
+          )}
         </div>
 
         {/* Description */}
-        <p className="text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-400">
+        <p className="text-[14px] leading-relaxed text-zinc-500 dark:text-zinc-400">
           {description}
         </p>
 
-        {/* Period */}
-        <div className="flex items-center gap-1.5 text-sm font-medium text-zinc-400
-          dark:text-zinc-500">
-          <Calendar size={13} strokeWidth={2} />
+        {/* Period badge */}
+        <span className="mt-1 inline-flex w-fit items-center rounded-full
+          bg-zinc-100 px-3 py-1 text-xs font-semibold text-zinc-500
+          dark:bg-zinc-800 dark:text-zinc-400">
           {period}
-        </div>
+        </span>
       </div>
-
-      {/* Arrow for linked rows */}
-      {href && (
-        <ArrowUpRight
-          size={20}
-          className="mt-1 shrink-0 text-zinc-300 transition-all duration-300
-            group-hover:text-orange-500 group-hover:translate-x-0.5
-            group-hover:-translate-y-0.5 dark:text-zinc-600"
-        />
-      )}
     </Wrapper>
   );
 }
