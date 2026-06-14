@@ -108,35 +108,26 @@ export default function ContactSection({ animated = false }: Props) {
           <div className="flex flex-col justify-between gap-6 lg:col-span-2">
 
             {/* CTA blurb */}
-            <div className="rounded-2xl border border-zinc-100 bg-white/70 p-7
-              dark:border-zinc-800/60 dark:bg-zinc-900/50">
-              <h3 className="text-xl font-extrabold tracking-tight text-zinc-900
-                dark:text-white">
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-sm dark:border-slate-800 dark:bg-slate-950">
+              <h3 className="text-xl font-semibold tracking-tight text-slate-950 dark:text-white">
                 Let's work together
               </h3>
-              <p className="mt-2 text-[14px] leading-relaxed text-zinc-500 dark:text-zinc-400">
-                Open to full-time roles, contract work, and collaborations in
-                networking, cloud infrastructure, and NOC operations.
-                I typically respond within 24 hours.
+              <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
+                Open to full-time roles, contract work, and collaborations in networking, cloud infrastructure, and L2 network engineering.
               </p>
 
               {/* Response time badge */}
-              <div className="mt-5 inline-flex items-center gap-2 rounded-full
-                bg-green-500/10 px-3.5 py-1.5 ring-1 ring-green-500/20">
+              <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-green-50 px-3.5 py-1.5 text-sm font-semibold text-green-700 dark:bg-green-500/10 dark:text-green-200">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping
-                    rounded-full bg-green-400 opacity-75" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-70" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
                 </span>
-                <span className="text-xs font-semibold text-green-600 dark:text-green-400">
-                  Usually responds within 24 hrs
-                </span>
+                Usually responds within 24 hrs
               </div>
             </div>
 
             {/* Direct contact links */}
-            <div className="rounded-2xl border border-zinc-100 bg-white/70 p-7
-              dark:border-zinc-800/60 dark:bg-zinc-900/50 space-y-4">
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-sm dark:border-slate-800 dark:bg-slate-950 space-y-4">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-zinc-400
                 dark:text-zinc-500">
                 Or reach me directly
@@ -210,8 +201,7 @@ export default function ContactSection({ animated = false }: Props) {
 
           {/* ── RIGHT PANEL — Form ── */}
           <div className="lg:col-span-3">
-            <div className="h-full rounded-2xl border border-zinc-100 bg-white/70 p-8
-              dark:border-zinc-800/60 dark:bg-zinc-900/50">
+            <div className="h-full rounded-3xl border border-slate-200 bg-[var(--surface)] p-8 shadow-sm dark:border-slate-800 dark:bg-slate-950">
               <form onSubmit={onSubmit} className="flex h-full flex-col gap-5">
 
                 {/* Honeypot */}

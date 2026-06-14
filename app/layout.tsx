@@ -4,7 +4,6 @@ import { Poppins } from "next/font/google";
 import Footer from "./components/Footer";
 import ScrollToTitleOnMobile from "./components/ScrollToTitleOnMobile";
 import { Analytics } from "@vercel/analytics/next";
-import CursorGlow from "./components/CursorGlow";
 import { ThemeProvider } from "./components/ThemeProvider";
 
 const poppins = Poppins({
@@ -27,12 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${poppins.variable} dark`}>
-      <body className="font-sans bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
+    <html lang="en" className={`${poppins.variable}`}>
+      <body className="font-sans bg-[var(--background)] text-[var(--foreground)]">
         <ThemeProvider>
-          <CursorGlow />
           <Navbar />
-          <ScrollToTitleOnMobile />
           <div className="pt-24">
             {children}
           </div>

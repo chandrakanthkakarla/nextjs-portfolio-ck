@@ -47,10 +47,10 @@ export default function ProjectRow({
         whileHover={{ y: -3 }}
         transition={{ type: "spring", stiffness: 320, damping: 22 }}
         className="group relative flex flex-col gap-5 sm:flex-row sm:items-start
-          sm:justify-between rounded-2xl border border-zinc-100 bg-white/70 p-6
-          transition-all duration-300 hover:border-zinc-200 hover:bg-white
-          hover:shadow-xl hover:shadow-black/5 dark:border-zinc-800/60
-          dark:bg-zinc-900/50 dark:hover:border-zinc-700 dark:hover:bg-zinc-800/60"
+          sm:justify-between rounded-3xl border border-slate-200 bg-[var(--surface)] p-6
+          transition-all duration-300 hover:border-slate-300 hover:bg-slate-50
+          hover:shadow-sm dark:border-slate-800 dark:bg-slate-950
+          dark:hover:border-slate-700 dark:hover:bg-slate-900"
       >
         <div className="flex gap-5 max-w-2xl">
 
@@ -59,7 +59,7 @@ export default function ProjectRow({
             onClick={() => setLightbox(true)}
             aria-label={`View ${name} image`}
             className="group/img relative h-[72px] w-[72px] shrink-0 overflow-hidden
-              rounded-xl bg-zinc-100 ring-1 ring-zinc-200 cursor-zoom-in
+              rounded-xl bg-zinc-50 ring-1 ring-zinc-200 cursor-zoom-in
               dark:bg-zinc-800 dark:ring-zinc-700"
           >
             <img

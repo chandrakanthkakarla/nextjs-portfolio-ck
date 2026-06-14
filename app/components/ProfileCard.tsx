@@ -10,7 +10,7 @@ const socials = [
 const stats = [
   { value: "2+",   label: "Years Exp."  },
   { value: "CCNA", label: "In Progress" },
-  { value: "NOC",  label: "Operations"  },
+  { value: "Network Engineer L2",  label: "Operations"  },
 ];
 
 const certBadges = [
@@ -23,52 +23,23 @@ const certBadges = [
 export default function ProfileCard() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-      className="relative overflow-hidden rounded-3xl
-        bg-white/80 shadow-2xl shadow-black/8 ring-1 ring-black/5
-        backdrop-blur-xl
-        dark:bg-zinc-900/80 dark:shadow-black/40 dark:ring-white/8"
+      transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+      className="overflow-hidden rounded-3xl border border-slate-200 bg-[var(--surface)] shadow-sm dark:border-slate-800 dark:bg-slate-950"
     >
-      {/* Glow blob top-left */}
-      <div
-        className="pointer-events-none absolute -left-16 -top-16 h-56 w-56 rounded-full blur-3xl"
-        style={{ backgroundColor: "rgba(var(--accent, 249 115 22), 0.08)" }}
-      />
-      {/* Glow blob bottom-right */}
-      <div
-        className="pointer-events-none absolute -bottom-16 -right-10 h-56 w-56 rounded-full blur-3xl"
-        style={{ backgroundColor: "rgba(var(--accent, 249 115 22), 0.05)" }}
-      />
-
-      {/* Decorative spinning rings */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-        className="pointer-events-none absolute -left-12 -top-12 h-48 w-48 rounded-full
-          border-[1.5px] border-dashed"
-        style={{ borderColor: "rgba(var(--accent, 249 115 22), 0.18)" }}
-      />
-      <motion.div
-        animate={{ rotate: -360 }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        className="pointer-events-none absolute -right-12 -bottom-12 h-48 w-48 rounded-full
-          border-[1.5px] border-dashed border-zinc-200/50 dark:border-zinc-700/40"
-      />
-
-      <div className="relative p-7">
-        {/* Avatar */}
-        <div className="rounded-2xl bg-gradient-to-br from-zinc-100 to-zinc-50 p-1
-          dark:from-zinc-800 dark:to-zinc-900 shadow-inner">
-          <div className="h-[210px] w-full overflow-hidden rounded-xl">
-            <img
-              src="/img/smart.png"
-              alt="Chandrakanth Kakarla — Network Engineer"
-              className="h-full w-full object-cover object-top"
-            />
-          </div>
-        </div>
+      <div className="p-6">
+        <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-center dark:border-slate-800 dark:bg-slate-900">
+        <p className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+          Hi, I’m Chandrakanth
+        </p>
+        <p className="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">
+          Network Engineer L2
+        </p>
+        <p className="mt-4 text-xs uppercase tracking-[0.25em] text-slate-400 dark:text-slate-500">
+          Secure Networks • Reliable Operations
+        </p>
+      </div>
 
         {/* Name */}
         <motion.h2
@@ -97,18 +68,12 @@ export default function ProfileCard() {
 
         {/* Available badge */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.54, duration: 0.5 }}
+          transition={{ delay: 0.54, duration: 0.4 }}
           className="mt-3 flex justify-center"
         >
-          <span className="flex items-center gap-2 rounded-full bg-green-500/10 px-4 py-1.5
-            text-sm font-semibold text-green-600 ring-1 ring-green-500/20 dark:text-green-400">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full
-                bg-green-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-            </span>
+          <span className="rounded-full bg-emerald-50 px-4 py-1.5 text-sm font-semibold text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-200">
             Available
           </span>
         </motion.div>

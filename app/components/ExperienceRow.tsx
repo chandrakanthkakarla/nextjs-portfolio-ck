@@ -25,11 +25,11 @@ export default function ExperienceRow({
       {...(href ? { href, target: "_blank", rel: "noreferrer" } : {})}
       whileHover={{ y: -2 }}
       transition={{ type: "spring", stiffness: 320, damping: 22 }}
-      className="group relative flex gap-5 rounded-2xl border border-zinc-100
-        bg-white/70 p-6 transition-all duration-300
-        hover:border-zinc-200 hover:bg-white hover:shadow-xl hover:shadow-black/5
-        dark:border-zinc-800/60 dark:bg-zinc-900/50 dark:hover:border-zinc-700
-        dark:hover:bg-zinc-800/60"
+      className="group relative flex gap-5 rounded-3xl border border-slate-200
+        bg-[var(--surface)] p-6 transition-all duration-300
+        hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm
+        dark:border-slate-800 dark:bg-slate-950 dark:hover:border-slate-700
+        dark:hover:bg-slate-900"
     >
       {/* Left accent bar */}
       <div

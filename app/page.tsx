@@ -1,6 +1,5 @@
 "use client";
 
-import NetworkBackground from "./components/NetworkBackground";
 import { useEffect, useRef, useState } from "react";
 import { useInView, motion } from "framer-motion";
 import ContactSection from "./components/ContactSection";
@@ -10,7 +9,21 @@ import ProjectsSection from "./components/ProjectsSection";
 import ToolsSection from "./components/ToolsSection";
 import { Sparkles, Target } from "lucide-react";
 
+function getExperienceYears(joinDate: string) {
+  const join = new Date(joinDate);
+  const now = new Date();
+  let years = now.getFullYear() - join.getFullYear();
+  if (
+    now.getMonth() < join.getMonth() ||
+    (now.getMonth() === join.getMonth() && now.getDate() < join.getDate())
+  ) {
+    years -= 1;
+  }
+  return years;
+}
+
 export default function HomePage() {
+  const experienceYears = getExperienceYears("2023-08-31");
   return (
     <main className="pt-14">
       <section className="mx-auto max-w-6xl px-4">
@@ -27,62 +40,51 @@ export default function HomePage() {
             {/* ── HERO ── */}
             <section
               id="home"
-              className="relative scroll-mt-28 overflow-hidden rounded-3xl
-                bg-zinc-950 px-10 py-16 shadow-2xl shadow-black/40
-                ring-1 ring-white/5"
+              className="scroll-mt-28 rounded-[2rem] border border-slate-200 bg-[var(--surface)] shadow-sm dark:border-slate-800 dark:bg-slate-950"
             >
-              {/* Animated network canvas */}
-              <NetworkBackground />
-
-              {/* Glow blobs */}
-              <div className="pointer-events-none absolute -top-20 -left-20 h-72 w-72
-                rounded-full bg-orange-500/10 blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-20 -right-10 h-64 w-64
-                rounded-full bg-blue-500/8 blur-3xl" />
-
-              {/* Content */}
-              <div className="relative z-10">
-
-                {/* Heading */}
-                <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  className="font-black leading-[0.88] tracking-tight"
-                >
-                  <span className="block text-[clamp(3.2rem,6.5vw,6.5rem)] text-white">
-                    NETWORK
+              <div className="p-10 md:p-14">
+                <div className="max-w-3xl">
+                  <span className="inline-flex rounded-full bg-orange-50 px-4 py-1 text-sm font-semibold text-orange-700 dark:bg-orange-500/10 dark:text-orange-300">
+                    Network Engineer L2
                   </span>
-                  <Typewriter />
-                </motion.h1>
 
-                {/* Description */}
-                <motion.p
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.25 }}
-                  className="mt-6 max-w-lg text-[15px] leading-relaxed text-zinc-400"
-                >
-                  Passionate about building secure and reliable network
-                  infrastructures. Focused on turning complex technical
-                  challenges into stable, high-performing systems that drive
-                  real-world impact.
-                </motion.p>
+                  <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.55, delay: 0.1 }}
+                    className="mt-6 text-[clamp(2.8rem,5vw,4rem)] font-black tracking-tight text-slate-950 dark:text-white"
+                  >
+                    I help teams keep networks secure and stable.
+                  </motion.h1>
 
-                {/* Divider */}
-                <div className="my-8 h-px w-full bg-gradient-to-r from-transparent
-                  via-white/10 to-transparent" />
+                  <motion.p
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.55, delay: 0.2 }}
+                    className="mt-6 max-w-xl text-base leading-8 text-slate-600 dark:text-slate-300"
+                  >
+                    Specialized in 24/7 operations, incident response, and end-to-end network reliability for enterprise systems.
+                  </motion.p>
 
-                {/* Stats */}
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.35 }}
-                  className="flex flex-wrap gap-12"
-                >
-                  <Stat value={2} label="Years of Experience" />
-                  <Stat value={2} label="Projects Completed" />
-                </motion.div>
+                  <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                    <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-800 dark:bg-slate-900">
+                      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+                        Experience
+                      </p>
+                      <p className="mt-3 text-3xl font-extrabold text-slate-950 dark:text-white">
+                        {experienceYears} years
+                      </p>
+                    </div>
+                    <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-800 dark:bg-slate-900">
+                      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
+                        Reliability
+                      </p>
+                      <p className="mt-3 text-3xl font-extrabold text-slate-950 dark:text-white">
+                        24/7 focus
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -133,7 +135,7 @@ export default function HomePage() {
 
 /* ── Typewriter ── */
 function Typewriter() {
-  const words = ["ENGINEER", "NOC SPECIALIST", "SECURITY ANALYST"];
+  const words = ["ENGINEER", "NETWORK ENGINEER L2", "SECURITY ANALYST"];
   const [index, setIndex] = useState(0);
   const [displayed, setDisplayed] = useState("");
   const [deleting, setDeleting] = useState(false);
@@ -216,13 +218,12 @@ function InfoCard({
 }) {
   return (
     <motion.div
-      whileHover={{ y: -3 }}
-      transition={{ type: "spring", stiffness: 300, damping: 22 }}
-      className="group flex flex-col justify-between rounded-2xl border
-        border-zinc-100 bg-white/70 p-7 transition-all duration-300
-        hover:border-zinc-200 hover:bg-white hover:shadow-xl hover:shadow-black/5
-        dark:border-zinc-800/60 dark:bg-zinc-900/50 dark:hover:border-zinc-700
-        dark:hover:bg-zinc-800/60 min-h-[190px]"
+      whileHover={{ y: -2 }}
+      transition={{ type: "spring", stiffness: 260, damping: 24 }}
+      className="group flex flex-col justify-between rounded-3xl border
+        border-slate-200 bg-[var(--surface)] p-7 transition-all duration-300
+        hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm dark:border-slate-800
+        dark:bg-slate-950 dark:hover:border-slate-700 dark:hover:bg-slate-900 min-h-[190px]"
     >
       {/* Icon */}
       <div className={`mb-4 inline-flex h-10 w-10 items-center justify-center

@@ -15,9 +15,9 @@ type Project = {
 
 const projects: Project[] = [
   {
-    name: "NOC Operations",
+    name: "Network Engineer L2 Operations",
    description:
-  "Hands-on experience in 24/7 Network Operations Center (NOC) monitoring and incident management. Responsibilities include real-time network monitoring using SolarWinds, proactive troubleshooting across OSI layers, SLA-driven incident response and escalation, ticketing via ServiceNow, and cross-team coordination to ensure 99.9% uptime across enterprise infrastructure.",
+  "Hands-on experience in 24/7 Network Engineer L2 monitoring and incident management. Responsibilities include real-time network monitoring using SolarWinds, proactive troubleshooting across OSI layers, SLA-driven incident response and escalation, ticketing via ServiceNow, and cross-team coordination to ensure 99.9% uptime across enterprise infrastructure.",
 
     image: "/img/noc.jpg",
     github: false,

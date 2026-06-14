@@ -76,8 +76,8 @@ export default function Navbar() {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className={`flex items-center gap-1 rounded-full px-3 py-2 transition-all duration-300
           ${scrolled
-            ? "bg-white/85 shadow-xl shadow-black/10 ring-1 ring-black/5 backdrop-blur-2xl dark:bg-zinc-900/90 dark:shadow-black/40 dark:ring-white/8"
-            : "bg-white/60 backdrop-blur-xl ring-1 ring-black/5 dark:bg-zinc-900/70 dark:ring-white/5"
+            ? "bg-white/95 shadow-sm ring-1 ring-slate-200 dark:bg-slate-950/95 dark:ring-slate-700"
+            : "bg-white/90 dark:bg-slate-950/90"
           }`}
       >
         {navItems.map(({ href, label, icon: Icon, section }) => {

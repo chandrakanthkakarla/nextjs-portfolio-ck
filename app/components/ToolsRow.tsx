@@ -14,11 +14,11 @@ export default function ToolsRow({ name, subtitle, emoji }: ToolsRowProps) {
     <motion.div
       whileHover={{ y: -2 }}
       transition={{ type: "spring", stiffness: 320, damping: 22 }}
-      className="group flex items-center gap-4 rounded-2xl border border-zinc-100
-        bg-white/70 px-5 py-4 transition-all duration-300
-        hover:border-zinc-200 hover:bg-white hover:shadow-lg hover:shadow-black/5
-        dark:border-zinc-800/60 dark:bg-zinc-900/50 dark:hover:border-zinc-700
-        dark:hover:bg-zinc-800/60"
+      className="group flex items-center gap-4 rounded-3xl border border-slate-200
+        bg-[var(--surface)] px-5 py-4 transition-all duration-300
+        hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm
+        dark:border-slate-800 dark:bg-slate-950 dark:hover:border-slate-700
+        dark:hover:bg-slate-900"
     >
       {/* Emoji icon — no file needed */}
       <div
