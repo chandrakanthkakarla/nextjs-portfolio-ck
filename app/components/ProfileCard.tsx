@@ -7,10 +7,23 @@ const socials = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/chandrakanth18", icon: Linkedin },
 ];
 
+function getExperienceYears(joinDate: string) {
+  const join = new Date(joinDate);
+  const now = new Date();
+  let years = now.getFullYear() - join.getFullYear();
+  if (
+    now.getMonth() < join.getMonth() ||
+    (now.getMonth() === join.getMonth() && now.getDate() < join.getDate())
+  ) {
+    years -= 1;
+  }
+  return years;
+}
+
 const stats = [
-  { value: "2+",   label: "Years Exp."  },
+  { value: `${getExperienceYears("2023-08-31")}+`, label: "Years Exp." },
   { value: "CCNA", label: "In Progress" },
-  { value: "Network Engineer L2",  label: "Operations"  },
+  { value: "Network Engineer L2", label: "Operations" },
 ];
 
 const certBadges = [
