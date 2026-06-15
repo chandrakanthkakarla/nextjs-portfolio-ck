@@ -8,22 +8,16 @@ import ProfileCard from "./components/ProfileCard";
 import ProjectsSection from "./components/ProjectsSection";
 import ToolsSection from "./components/ToolsSection";
 import { Sparkles, Target } from "lucide-react";
-
-function getExperienceYears(joinDate: string) {
-  const join = new Date(joinDate);
-  const now = new Date();
-  let years = now.getFullYear() - join.getFullYear();
-  if (
-    now.getMonth() < join.getMonth() ||
-    (now.getMonth() === join.getMonth() && now.getDate() < join.getDate())
-  ) {
-    years -= 1;
-  }
-  return years;
-}
+import { formatExperienceDuration } from "./lib/experience";
+import CaseStudyCard from "./components/CaseStudyCard";
+import GitHubProjectCard from "./components/GitHubProjectCard";
+import BlogArticleCard from "./components/BlogArticleCard";
+import { caseStudies } from "./lib/projects-data";
+import { githubProjects } from "./lib/github-projects";
+import { blogArticles } from "./lib/blog-data";
 
 export default function HomePage() {
-  const experienceYears = getExperienceYears("2023-08-31");
+  const experienceYears = formatExperienceDuration("2023-08-31");
   return (
     <main className="pt-14">
       <section className="mx-auto max-w-6xl px-4">
@@ -72,7 +66,7 @@ export default function HomePage() {
                         Experience
                       </p>
                       <p className="mt-3 text-3xl font-extrabold text-slate-950 dark:text-white">
-                        {experienceYears} years
+                        {experienceYears}
                       </p>
                     </div>
                     <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-800 dark:bg-slate-900">
@@ -119,6 +113,160 @@ export default function HomePage() {
             {/* ── TOOLS ── */}
             <section id="tools" className="scroll-mt-28">
               <ToolsSection animated />
+            </section>
+
+            {/* ── CASE STUDIES (Featured) ── */}
+            <section className="scroll-mt-28">
+              <div className="mb-10 px-10">
+                <p className="mb-1 text-sm font-semibold uppercase tracking-[0.2em] text-orange-500">
+                  Portfolio
+                </p>
+                <h2 className="font-black leading-[0.9] tracking-tight">
+                  <span className="block text-[clamp(2.4rem,5vw,4rem)] text-black dark:text-white">
+                    Featured
+                  </span>
+                  <span className="block text-[clamp(2.4rem,5vw,4rem)] text-zinc-500/50">
+                    Case Study
+                  </span>
+                </h2>
+              </div>
+              {caseStudies.slice(0, 1).map((study) => (
+                <CaseStudyCard
+                  key={study.id}
+                  title={study.title}
+                  role={study.role}
+                  period={study.period}
+                  challenge={study.challenge}
+                  solution={study.solution}
+                  technologies={study.technologies}
+                  metrics={study.metrics}
+                  outcome={study.outcome}
+                  keyLearnings={study.keyLearnings}
+                />
+              ))}
+              <div className="mt-8 text-center">
+                <a
+                  href="/projects"
+                  className="inline-flex items-center gap-2 rounded-full bg-orange-600 px-6 py-3 font-semibold text-white hover:bg-orange-700 transition-colors"
+                >
+                  View All Case Studies
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </section>
+
+            {/* ── AUTOMATION ── */}
+            <section id="automation" className="scroll-mt-28">
+              <div className="mb-10 px-10">
+                <p className="mb-1 text-sm font-semibold uppercase tracking-[0.2em] text-orange-500">
+                  Open Source
+                </p>
+                <h2 className="font-black leading-[0.9] tracking-tight">
+                  <span className="block text-[clamp(2.4rem,5vw,4rem)] text-black dark:text-white">
+                    Automation
+                  </span>
+                  <span className="block text-[clamp(2.4rem,5vw,4rem)] text-zinc-500/50">
+                    Projects
+                  </span>
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                {githubProjects.slice(0, 2).map((project) => (
+                  <GitHubProjectCard
+                    key={project.id}
+                    name={project.name}
+                    description={project.description}
+                    technologies={project.technologies}
+                    github={project.github}
+                    status={project.status}
+                    highlights={project.highlights}
+                  />
+                ))}
+              </div>
+              <div className="mt-8 text-center">
+                <a
+                  href="/automation"
+                  className="inline-flex items-center gap-2 rounded-full bg-orange-600 px-6 py-3 font-semibold text-white hover:bg-orange-700 transition-colors"
+                >
+                  View All Projects
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </section>
+
+            {/* ── BLOG (Featured) ── */}
+            <section className="scroll-mt-28">
+              <div className="mb-10 px-10">
+                <p className="mb-1 text-sm font-semibold uppercase tracking-[0.2em] text-orange-500">
+                  Insights
+                </p>
+                <h2 className="font-black leading-[0.9] tracking-tight">
+                  <span className="block text-[clamp(2.4rem,5vw,4rem)] text-black dark:text-white">
+                    Latest
+                  </span>
+                  <span className="block text-[clamp(2.4rem,5vw,4rem)] text-zinc-500/50">
+                    Articles
+                  </span>
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                {blogArticles.slice(0, 2).map((article) => (
+                  <BlogArticleCard
+                    key={article.id}
+                    title={article.title}
+                    excerpt={article.excerpt}
+                    date={article.date}
+                    readTime={article.readTime}
+                    tags={article.tags}
+                    slug={article.slug}
+                  />
+                ))}
+              </div>
+              <div className="mt-8 text-center">
+                <a
+                  href="/blog"
+                  className="inline-flex items-center gap-2 rounded-full bg-orange-600 px-6 py-3 font-semibold text-white hover:bg-orange-700 transition-colors"
+                >
+                  Read All Articles
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </a>
+              </div>
             </section>
 
             {/* ── CONTACT ── */}

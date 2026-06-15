@@ -11,7 +11,8 @@ const navItems = [
   { href: "/",           label: "Home",       icon: Home,          section: "home"       },
   { href: "/projects",   label: "Projects",   icon: FolderKanban,  section: "projects"   },
   { href: "/experience", label: "Experience", icon: BarChart3,     section: "experience" },
-  { href: "/tools",      label: "Tools",      icon: Wrench,        section: "tools"      },
+  { href: "/tools",      label: "Skills",     icon: Wrench,        section: "tools"      },
+  { href: "/automation", label: "Automation", icon: Zap,           section: "automation" },
   { href: "/contact",    label: "Contact",    icon: MailCheck,     section: "contact"    },
 ];
 
@@ -47,7 +48,7 @@ export default function Navbar() {
       { rootMargin: "-10% 0px -85% 0px", threshold: 0 }
     );
 
-    ["home", "projects", "experience", "tools", "contact"].forEach((id) => {
+    ["home", "projects", "experience", "tools", "automation", "contact"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });

@@ -1,25 +1,15 @@
+"use client";
+
 import ExperienceRow from "./ExperienceRow";
 import Reveal from "./Reveal";
+import { formatExperienceDuration } from "../lib/experience";
 
 type ExperienceSectionProps = { animated?: boolean };
-
-function getExperienceYears(joinDate: string) {
-  const join = new Date(joinDate);
-  const now = new Date();
-  let years = now.getFullYear() - join.getFullYear();
-  if (
-    now.getMonth() < join.getMonth() ||
-    (now.getMonth() === join.getMonth() && now.getDate() < join.getDate())
-  ) {
-    years -= 1;
-  }
-  return years;
-}
 
 export default function ExperienceSection({
   animated = false,
 }: ExperienceSectionProps) {
-  const experienceYears = getExperienceYears("2023-08-31");
+  const experienceYears = formatExperienceDuration("2023-08-31");
   const Content = (
     <section className="space-y-12">
       {/* Heading */}
@@ -29,7 +19,7 @@ export default function ExperienceSection({
         </p>
         <h2 className="font-black leading-[0.9] tracking-tight">
           <span className="block text-[clamp(3.2rem,6.5vw,6.5rem)] text-black dark:text-white">
-            {experienceYears} YEARS
+            {experienceYears}
           </span>
           <span className="block text-[clamp(3.2rem,6.5vw,6.5rem)] text-zinc-500/50">
             EXPERIENCE
